@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- mapper 데이터베이스 접근 및 결과를 반환받는 속성파일 -->
+<mapper namespace="i">
+	<insert id="insertItem" parameterType="vo.ItemVO" >
+		insert into item values(
+			seq_idx.nextVal,
+			#{secondIdx},
+			#{name},
+			#{content},
+			#{price},
+			SYSTIMESTAMP,
+			SYSTIMESTAMP,
+			'0'
+		)
+		
+	</insert>
+	
+	<select id="selectItem" resultType="entity.ItemEntity" parameterType="int">
+		select * from item where item_idx=#{idx}
+	</select>
+	
+	<select id="selectList" resultType="entity.ItemEntity">
+		select * from item
+	</select>
+	
+	<insert id="updateItem" parameterType="vo.UpdateItemVO">
+		insert into item values(
+			 #{item_idx},
+			 #{second_idx},
+			 #{name},
+			 #{content},
+			 #{price},
+			 #{create_date},
+			 SYSTIMESTAMP,
+			 #{sell_count}	s
+		)
+	</insert>
+
+	<delete id="deleteItem" parameterType="int">
+		 DELETE FROM item WHERE item_idx = #{idx}
+	</delete>
+	
+<!--<select id="NameConfirm" resultType="Integer" parameterType="vo.ItemVO">
+		select * from item where name=#{name}
+	</select> -->
+	
+	<select id="secondList" resultType="vo.SecondVO" parameterType="int">
+		select * from second_category where first_idx = #{first_idx}
+	</select>
+	
+	<select id="firstList" resultType="vo.FirstVO">
+		select * from first_category
+	</select>
+	
+</mapper>
+
+
+
+
