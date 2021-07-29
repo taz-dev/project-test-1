@@ -8,18 +8,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 회원가입 -->
 	<insert id="register" parameterType="vo.MemberVO">
 	    insert into member values( seq_mem.nextval,
-	               			#{id}, 
-	                 	    #{pw},
-	                 	    #{name},
-	                 	    #{addr},
-	                 	    #{tel},
-	                 	    #{isAdmin} )
+	               			       #{id}, 
+	                 	           #{pw},
+	                 	           #{name},
+	                 	  		   #{addr},
+	                 	  		   #{tel},
+	                 	 		   #{isAdmin} 
+	                 	 		   )
     </insert>
     
     <!-- 로그인 -->
 	<select id="login" resultType="vo.MemberVO" parameterType="vo.MemberVO"> <!-- resultType="com.koreait.vo.MemberVO" -->
-		select * from member		 
-		where id = #{id}
+		select * from member where id = #{id}
 	</select>
 	
 	<!-- 회원정보 수정 -->
@@ -33,9 +33,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 	<!-- 회원탈퇴 -->
-	<delete id="memberDelete" parameterType="vo.MemberVO">
-		delete from member
-		where id = #{id}
+	<delete id="memberDelete" parameterType="int">
+		delete from member where mem_idx = #{idx}
 	</delete>
 	
 	<!-- 패스워드 체크 -->
@@ -46,14 +45,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<!-- 아이디 중복 체크 -->
-	<select id="idChk" resultType="vo.MemberVO">
-		select count(*) from member
-		where id = #{id}
+	<select id="idChk" resultType="vo.MemberVO" parameterType="vo.MemberVO">
+		select count(*) from member where id = #{id}
 	</select>
 	
 	<select id="searchUser" parameterType="map" resultType="map">
-		select * from member
-		where id = #{id}
+		select * from member where id = #{id}
 	</select>
 	
 </mapper>

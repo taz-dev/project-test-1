@@ -99,7 +99,6 @@ public class ItemController {
 		return itemDao.deleteItem(idx);
 	}
 	
-	
 }
 
 
